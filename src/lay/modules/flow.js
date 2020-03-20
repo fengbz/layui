@@ -10,7 +10,7 @@
 layui.define('jquery', function(exports){
   "use strict";
   
-  var $ = layui.jquery, Flow = function(options){}
+  var $ = layui.$, Flow = function(options){}
   ,ELEM_MORE = 'layui-flow-more'
   ,ELEM_LOAD = '<i class="layui-anim layui-anim-rotate layui-anim-loop layui-icon ">&#xe63e;</i>';
 
@@ -77,7 +77,7 @@ layui.define('jquery', function(exports){
       var othis = $(this), top = othis.scrollTop();
       
       if(timer) clearTimeout(timer);
-      if(isOver) return;
+      if(isOver || !elem.width()) return; //如果已经结束，或者元素处于隐藏状态，则不执行滚动加载
       
       timer = setTimeout(function(){
         //计算滚动所在容器的可视高度
@@ -94,6 +94,7 @@ layui.define('jquery', function(exports){
         }
       }, 100);
     });
+    
     return that;
   };
   
